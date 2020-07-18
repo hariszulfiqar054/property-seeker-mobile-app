@@ -65,7 +65,7 @@ const Login = ({navigation}) => {
                 onPress={handleSubmit}
               />
             </View>
-            <BtnWrapper press={() => navigation.navigate('signup')}>
+            <BtnWrapper press={() => navigation.navigate('dashboard')}>
               <View style={styles.accountContainer}>
                 <Text style={{color: Work.COLOR.primary, fontWeight: 'bold'}}>
                   Don't have an account? Sign up here
