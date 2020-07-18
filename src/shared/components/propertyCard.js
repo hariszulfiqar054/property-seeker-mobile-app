@@ -6,9 +6,18 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BathIcon from 'react-native-vector-icons/FontAwesome';
 
 const {WP} = Work;
-const PropertyCard = ({img, area, bedroom, bathroom}) => {
+const PropertyCard = ({
+  img,
+  area,
+  bedroom,
+  bathroom,
+  onPress,
+  city,
+  country,
+  price,
+}) => {
   return (
-    <BtnWrapper>
+    <BtnWrapper press={onPress}>
       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image
@@ -18,10 +27,17 @@ const PropertyCard = ({img, area, bedroom, bathroom}) => {
             }}
           />
         </View>
+        <View style={[styles.row, {justifyContent: 'space-between'}]}>
+          {price && <Text style={styles.price}>Rs. {price}</Text>}
+          <Text style={styles.price}>
+            {city && <Text>{city} ,</Text>}
+            {country && <Text>{country}</Text>}
+          </Text>
+        </View>
         <View
           style={[
             styles.row,
-            {justifyContent: 'space-around', marginTop: WP('2')},
+            {justifyContent: 'space-around', marginTop: WP('1')},
           ]}>
           {bedroom && (
             <View style={styles.row}>
@@ -57,8 +73,8 @@ export default PropertyCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Work.COLOR.white,
-    width: WP('60'),
-    height: WP('45'),
+    width: WP('65'),
+    height: WP('55'),
     shadowColor: Work.COLOR.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.6,
@@ -69,7 +85,7 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
   },
-  imgContainer: {width: '100%', height: '75%'},
+  imgContainer: {width: '100%', height: '70%'},
   text: {
     fontSize: WP('3.5'),
     fontWeight: 'bold',
@@ -78,5 +94,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  price: {
+    fontWeight: 'bold',
+    fontSize: WP('4'),
+    padding: WP('1'),
   },
 });
