@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../pages/auth/login/login';
 import Signup from '../pages/auth/signup/signup';
 import Dashboard from '../tabNavigator/tabNavigator';
+import PropertyDetail from '../pages/home/properties/screens/propertyDetails';
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -23,6 +24,11 @@ const Routes = () => {
         <Stack.Screen
           component={Dashboard}
           name="dashboard"
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          component={PropertyDetail}
+          name="propertyDetail"
           options={{headerShown: false}}
         />
       </Stack.Navigator>
