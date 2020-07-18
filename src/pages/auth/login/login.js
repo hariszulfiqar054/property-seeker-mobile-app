@@ -11,7 +11,7 @@ import BtnWrapper from '../../../shared/components/btnWrapper';
 const {WP} = Work;
 const Login = ({navigation}) => {
   return (
-    <AuthWrapper navigation={navigation} name="SIGN IN">
+    <AuthWrapper navigation={navigation} name="SIGN IN" showLogo>
       <Formik
         initialValues={{
           email: '',

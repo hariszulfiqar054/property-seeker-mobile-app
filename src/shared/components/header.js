@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     color: Work.COLOR.white,
     textAlign: 'center',
     fontSize: WP('5'),
-    fontWeight: 'bold',
   },
   subContainer: {
     flexDirection: 'row',

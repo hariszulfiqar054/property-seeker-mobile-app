@@ -10,7 +10,7 @@ import Btn from '../components/btn';
 const {WP} = Work;
 const Signup = ({navigation}) => {
   return (
-    <AuthWrapper navigation={navigation} name="SIGN UP" isBack>
+    <AuthWrapper navigation={navigation} name="SIGN UP" isBack showLogo>
       <Formik
         initialValues={{
           name: '',

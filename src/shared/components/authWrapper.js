@@ -8,7 +8,7 @@ import Btn from '../components/btnWrapper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 const {WP, HP} = Work;
-const AuthWrapper = ({name, navigation, isBack, children}) => {
+const AuthWrapper = ({name, navigation, isBack, children, showLogo}) => {
   return (
     <SafeWrapper>
       <KeyboardAwareScrollView>
@@ -27,13 +27,15 @@ const AuthWrapper = ({name, navigation, isBack, children}) => {
           )}
 
           <Text style={styles.signIn}>{name}</Text>
+          {showLogo && (
+            <HomeIcon
+              style={styles.iconStyle}
+              name="building"
+              color={Work.COLOR.white}
+              size={WP('20')}
+            />
+          )}
 
-          <HomeIcon
-            style={styles.iconStyle}
-            name="building"
-            color={Work.COLOR.white}
-            size={WP('20')}
-          />
           {children}
         </ImageBackground>
       </KeyboardAwareScrollView>
