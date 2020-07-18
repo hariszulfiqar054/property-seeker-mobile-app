@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import SafeWrapper from '../../../shared/components/safeWrapper';
 
 const HotProperties = () => {
   return (
-    <View>
+    <SafeWrapper>
       <Text>Hot Properties</Text>
-    </View>
+    </SafeWrapper>
   );
 };
 

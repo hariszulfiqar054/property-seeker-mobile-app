@@ -1,4 +1,4 @@
-import React, {Children} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import SafeWrapper from '../components/safeWrapper';
 import HomeIcon from 'react-native-vector-icons/FontAwesome5';
