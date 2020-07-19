@@ -4,9 +4,15 @@ import SafeWrapper from '../../../shared/components/authWrapper';
 import PropertyCard from '../../../shared/components/propertyCard';
 
 const Properties = ({navigation}) => {
-  return (
-    <SafeWrapper>
-      <PropertyCard
+  return <SafeWrapper></SafeWrapper>;
+};
+
+export default Properties;
+
+const styles = StyleSheet.create({});
+
+{
+  /* <PropertyCard
         onPress={() =>
           navigation.navigate('propertyDetail', {
             img:
@@ -18,6 +24,7 @@ const Properties = ({navigation}) => {
             city: 'Lahore',
             country: 'Pakistan',
             isHot: true,
+            description: 'Description....',
           })
         }
         img="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg"
@@ -28,11 +35,5 @@ const Properties = ({navigation}) => {
         country="Pakistan"
         price="234909"
         isHot
-      />
-    </SafeWrapper>
-  );
-};
-
-export default Properties;
-
-const styles = StyleSheet.create({});
+      /> */
+}

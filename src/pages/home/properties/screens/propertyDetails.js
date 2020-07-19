@@ -6,14 +6,16 @@ import * as Work from '../../../../shared/exporter';
 import LocationIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BathIcon from 'react-native-vector-icons/FontAwesome';
+import BtnWrapper from '../../../../shared/components/btnWrapper';
+import HotIcon from 'react-native-vector-icons/Fontisto';
 
 const {WP} = Work;
 const PropertyDetails = ({navigation, route}) => {
   return (
     <SafeWrapper>
       <Header label="property detail" isBack navigation={navigation} />
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{flex: 1}}>
+      <View style={{flex: 1}}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
           <View style={styles.imgContainer}>
             <Image style={styles.img} source={{uri: route?.params?.img}} />
           </View>
@@ -30,6 +32,23 @@ const PropertyDetails = ({navigation, route}) => {
                 <Text>{route?.params?.country}</Text>
               </Text>
             </View>
+            {route?.params?.isHot && (
+              <View
+                style={[
+                  styles.locationContainer,
+                  {position: 'absolute', right: '5%', top: '9%'},
+                ]}>
+                <Text style={{color: '#f07f13', fontWeight: 'bold'}}>
+                  Hot Choices
+                </Text>
+                <HotIcon
+                  style={{marginLeft: WP('1')}}
+                  name="fire"
+                  size={WP('4')}
+                  color="#f27d0c"
+                />
+              </View>
+            )}
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.iconContainer}>
@@ -56,24 +75,16 @@ const PropertyDetails = ({navigation, route}) => {
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Description</Text>
             <Text style={{textAlign: 'left'}}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              {route?.params?.description}
             </Text>
           </View>
-        </View>
-      </ScrollView>
+          <BtnWrapper>
+            <View style={styles.btnContainer}>
+              <Text style={styles.btnText}>PLACE BID</Text>
+            </View>
+          </BtnWrapper>
+        </ScrollView>
+      </View>
     </SafeWrapper>
   );
 };
@@ -138,6 +149,23 @@ const styles = StyleSheet.create({
   },
   descriptionTitle: {
     fontSize: WP('5'),
+    fontWeight: 'bold',
+  },
+  btnContainer: {
+    width: '90%',
+    backgroundColor: Work.COLOR.yellow,
+    height: WP('12'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    shadowColor: Work.COLOR.black,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.6,
+    elevation: 6,
+    marginTop: WP('3'),
+  },
+  btnText: {
+    fontSize: WP('4.5'),
     fontWeight: 'bold',
   },
 });
