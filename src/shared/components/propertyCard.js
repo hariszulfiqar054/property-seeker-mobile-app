@@ -4,7 +4,7 @@ import * as Work from '../exporter';
 import BtnWrapper from './btnWrapper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BathIcon from 'react-native-vector-icons/FontAwesome';
-
+import HotIcon from 'react-native-vector-icons/Fontisto';
 const {WP} = Work;
 const PropertyCard = ({
   img,
@@ -15,6 +15,7 @@ const PropertyCard = ({
   city,
   country,
   price,
+  isHot,
 }) => {
   return (
     <BtnWrapper press={onPress}>
@@ -27,6 +28,20 @@ const PropertyCard = ({
             }}
           />
         </View>
+        {isHot && (
+          <View style={[styles.row, {alignSelf: 'center'}]}>
+            <Text style={{color: '#f07f13', fontWeight: 'bold'}}>
+              Hot Choices
+            </Text>
+            <HotIcon
+              style={{marginLeft: WP('1')}}
+              name="fire"
+              size={WP('4')}
+              color="#f27d0c"
+            />
+          </View>
+        )}
+
         <View style={[styles.row, {justifyContent: 'space-between'}]}>
           {price && <Text style={styles.price}>Rs. {price}</Text>}
           <Text style={styles.price}>
@@ -34,11 +49,7 @@ const PropertyCard = ({
             {country && <Text>{country}</Text>}
           </Text>
         </View>
-        <View
-          style={[
-            styles.row,
-            {justifyContent: 'space-around', marginTop: WP('1')},
-          ]}>
+        <View style={[styles.row, {justifyContent: 'space-around'}]}>
           {bedroom && (
             <View style={styles.row}>
               <Icon name="bed" color={Work.COLOR.grey} size={WP('6')} />
@@ -73,8 +84,8 @@ export default PropertyCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Work.COLOR.white,
-    width: WP('65'),
-    height: WP('55'),
+    width: WP('70'),
+    height: WP('64'),
     shadowColor: Work.COLOR.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.6,

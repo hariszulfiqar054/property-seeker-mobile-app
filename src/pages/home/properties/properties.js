@@ -11,6 +11,13 @@ const Properties = ({navigation}) => {
           navigation.navigate('propertyDetail', {
             img:
               'https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg',
+            price: '234909',
+            area: '4000 sq ft',
+            bedroom: '2',
+            bathroom: '3',
+            city: 'Lahore',
+            country: 'Pakistan',
+            isHot: true,
           })
         }
         img="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg"
@@ -20,6 +27,7 @@ const Properties = ({navigation}) => {
         city="Lahore"
         country="Pakistan"
         price="234909"
+        isHot
       />
     </SafeWrapper>
   );
