@@ -25,7 +25,7 @@ const TabNavigator = () => {
             <MaterialIcon
               name="home"
               color={focused ? Work.COLOR.primary : 'grey'}
-              size={25}
+              size={27}
             />
           ),
         }}
@@ -38,7 +38,7 @@ const TabNavigator = () => {
             <SearchIcon
               name="search1"
               color={focused ? Work.COLOR.primary : 'grey'}
-              size={25}
+              size={27}
             />
           ),
         }}
@@ -51,7 +51,7 @@ const TabNavigator = () => {
             <HotIcon
               name="fire"
               color={focused ? Work.COLOR.primary : 'grey'}
-              size={25}
+              size={27}
             />
           ),
         }}
@@ -64,7 +64,7 @@ const TabNavigator = () => {
             <MaterialIcon
               name="person"
               color={focused ? Work.COLOR.primary : 'grey'}
-              size={25}
+              size={27}
             />
           ),
         }}
