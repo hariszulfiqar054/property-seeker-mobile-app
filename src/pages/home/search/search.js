@@ -35,7 +35,7 @@ const Search = ({navigation}) => {
   return (
     <SafeWrapper>
       <Header label="search" />
-      <ScrollView contentContainerStyle={{flex: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1}}>
           <View style={styles.btnContainer}>
             <Button

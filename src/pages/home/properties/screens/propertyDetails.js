@@ -14,8 +14,8 @@ const PropertyDetails = ({navigation, route}) => {
   return (
     <SafeWrapper>
       <Header label="property detail" isBack navigation={navigation} />
-      <View style={{flex: 1}}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={{flex: 1}}>
           <View style={styles.imgContainer}>
             <Image style={styles.img} source={{uri: route?.params?.img}} />
           </View>
@@ -83,8 +83,8 @@ const PropertyDetails = ({navigation, route}) => {
               <Text style={styles.btnText}>PLACE BID</Text>
             </View>
           </BtnWrapper>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </SafeWrapper>
   );
 };

@@ -67,7 +67,12 @@ const Login = ({navigation}) => {
             </View>
             <BtnWrapper press={() => navigation.navigate('dashboard')}>
               <View style={styles.accountContainer}>
-                <Text style={{color: Work.COLOR.primary, fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    color: Work.COLOR.primary,
+                    fontWeight: 'bold',
+                    fontSize: WP('4'),
+                  }}>
                   Don't have an account? Sign up here
                 </Text>
               </View>
