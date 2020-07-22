@@ -35,7 +35,7 @@ const Info = () => {
             />
             <Text style={[styles.txt]}>Email</Text>
           </View>
-          <Text style={styles.txtDes}>hariszulfiqar054@gmail</Text>
+          <Text style={styles.txtDes}>hariszulfiqar054@gmail.com</Text>
         </View>
         <Hr />
       </View>
