@@ -1,39 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import SafeWrapper from '../../../shared/components/authWrapper';
 import PropertyCard from '../../../shared/components/propertyCard';
+import Header from '../../../shared/components/header';
+import PropertyOption from './components/propertyOptions';
 
 const Properties = ({navigation}) => {
-  return <SafeWrapper></SafeWrapper>;
+  const [isBuy, setIsBuy] = useState(true);
+
+  return (
+    <SafeWrapper>
+      <View style={styles.headerContainer}>
+        <Header label="home" />
+      </View>
+      <PropertyOption
+        propertyType={isBuy}
+        onPressBuy={() => setIsBuy(true)}
+        onPressRent={() => setIsBuy(false)}
+      />
+    </SafeWrapper>
+  );
 };
 
 export default Properties;
 
-const styles = StyleSheet.create({});
-
-{
-  /* <PropertyCard
-        onPress={() =>
-          navigation.navigate('propertyDetail', {
-            img:
-              'https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg',
-            price: '234909',
-            area: '4000 sq ft',
-            bedroom: '2',
-            bathroom: '3',
-            city: 'Lahore',
-            country: 'Pakistan',
-            isHot: true,
-            description: 'Description....',
-          })
-        }
-        img="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg"
-        area="4000 sq ft"
-        bedroom="2"
-        bathroom="3"
-        city="Lahore"
-        country="Pakistan"
-        price="234909"
-        isHot
-      /> */
-}
+const styles = StyleSheet.create({
+  headerContainer: {
+    position: 'absolute',
+    top: '3%',
+    alignSelf: 'center',
+  },
+});
