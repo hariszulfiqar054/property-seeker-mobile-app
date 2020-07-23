@@ -54,6 +54,7 @@ const Search = ({navigation}) => {
             <Input
               placeholder="Enter City Name"
               inputStyle={styles.inputStyle}
+              inputContainerStyle={{borderBottomWidth: 0}}
             />
           </View>
           <View style={styles.btnContainer}>
@@ -70,8 +71,7 @@ const Search = ({navigation}) => {
               onPressInc={() => bathroomHandler('inc')}
             />
           </View>
-          <View style={[styles.btnContainer, {marginTop: WP('15')}]}>
-            <DropDownBtn label="City" />
+          <View style={[{marginTop: WP('15')}]}>
             <DropDownBtn label="Area" />
           </View>
         </View>
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
     fontSize: WP('4'),
     padding: WP('2'),
     borderWidth: 1,
-    borderBottomWidth: 0,
     borderColor: Work.COLOR.grey,
     borderRadius: 5,
   },

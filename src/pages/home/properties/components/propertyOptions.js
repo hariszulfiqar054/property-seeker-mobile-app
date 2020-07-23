@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   container: {
     borderColor: Work.COLOR.white,
-    borderWidth: 2,
+    borderWidth: 1,
     height: WP('10'),
     width: '45%',
     alignSelf: 'center',
