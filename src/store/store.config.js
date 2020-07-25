@@ -2,8 +2,25 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-community/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
+import UserReducer from './reducer/user.reducer';
+import axios from 'axios';
+import ENV from '../shared/environment/environment';
 
-const rootReducer = combineReducers({});
+axios.defaults.baseURL = ENV.BASE_URL;
+
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = STORE.getState().user.token;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+const rootReducer = combineReducers({
+  user: UserReducer,
+});
 
 const persistConfig = {
   key: 'root',

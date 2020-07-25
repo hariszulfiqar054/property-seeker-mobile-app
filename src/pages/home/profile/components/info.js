@@ -4,9 +4,11 @@ import * as Work from '../../../../shared/exporter';
 import SafeWrapper from '../../../../shared/components/safeWrapper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Hr from '../../../../shared/components/hr';
+import {useSelector} from 'react-redux';
 
 const {WP} = Work;
 const Info = () => {
+  const user = useSelector((state) => state?.user?.user);
   return (
     <SafeWrapper>
       <View style={styles.subContainer}>
@@ -15,7 +17,7 @@ const Info = () => {
             <MaterialIcon name="person" size={WP('7')} color="orange" />
             <Text style={styles.txt}>Name</Text>
           </View>
-          <Text style={styles.txtDes}>Haris</Text>
+          <Text style={styles.txtDes}>{user?.name?.toUpperCase()}</Text>
         </View>
         <Hr />
         <View style={styles.containerMargins}>
@@ -23,7 +25,7 @@ const Info = () => {
             <MaterialIcon name="phone" size={WP('7')} color="#96bb7c" />
             <Text style={styles.txt}>Phone</Text>
           </View>
-          <Text style={styles.txtDes}>03084567319</Text>
+          <Text style={styles.txtDes}>{user?.contact}</Text>
         </View>
         <Hr />
         <View style={styles.containerMargins}>
@@ -35,7 +37,7 @@ const Info = () => {
             />
             <Text style={[styles.txt]}>Email</Text>
           </View>
-          <Text style={styles.txtDes}>hariszulfiqar054@gmail.com</Text>
+          <Text style={styles.txtDes}>{user?.email}</Text>
         </View>
         <Hr />
       </View>

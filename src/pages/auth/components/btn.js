@@ -3,15 +3,26 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Work from '../../../shared/exporter';
 import BtnWrapper from '../../../shared/components/btnWrapper';
+import {DotIndicator} from 'react-native-indicators';
 
 const {WP} = Work;
-const Btn = ({onPress, label, style}) => {
+const Btn = ({onPress, label, style, isLoading}) => {
   return (
     <View style={[styles.container, style]}>
       <BtnWrapper press={onPress}>
         <View style={styles.subContainer}>
-          <Text style={styles.text}>{label}</Text>
-          <Icon name="arrow-forward" size={WP('6')} />
+          {isLoading ? (
+            <DotIndicator
+              size={7}
+              style={{alignSelf: 'center'}}
+              color={Work.COLOR.black}
+            />
+          ) : (
+            <>
+              <Text style={styles.text}>{label}</Text>
+              <Icon name="arrow-forward" size={WP('6')} />
+            </>
+          )}
         </View>
       </BtnWrapper>
     </View>

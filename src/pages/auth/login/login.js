@@ -1,15 +1,47 @@
-import React from 'react';
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import * as Work from '../../../shared/exporter';
 import {Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 import * as Yup from 'yup';
 import AuthWrapper from '../../../shared/components/authWrapper';
 import {Input} from 'react-native-elements';
 import Btn from '../components/btn';
 import BtnWrapper from '../../../shared/components/btnWrapper';
+import axios from 'axios';
+import * as JOBS from '../../../store/action.exporter';
 
 const {WP} = Work;
 const Login = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [isLoading, setisLoading] = useState(false);
+
+  const loginHandler = async ({email, password}) => {
+    const isConnected = Work.checkInternetConnection();
+    if (isConnected) {
+      setisLoading(true);
+      try {
+        const response = await axios.post('user/login', {
+          email,
+          password,
+        });
+        if (response?.data?.data) {
+          dispatch(JOBS.saveUser(response?.data?.data));
+          navigation.navigate('dashboard');
+        }
+      } catch (error) {
+        if (error?.message?.includes('40')) {
+          Work.showToast('Invalid username or password');
+        } else {
+          Work.showToast('Server Timeout');
+        }
+      }
+
+      setisLoading(false);
+    } else {
+      Work.showToast(Work.INTERNET_CONNECTION_ERROR);
+    }
+  };
   return (
     <AuthWrapper navigation={navigation} name="SIGN IN" showLogo>
       <Formik
@@ -22,8 +54,7 @@ const Login = ({navigation}) => {
           password: Yup.string().required('Required'),
         })}
         onSubmit={(values, formikActions) => {
-          formikActions.setSubmitting(false);
-          console.log(values);
+          loginHandler(values);
         }}>
         {({
           handleBlur,
@@ -63,9 +94,10 @@ const Login = ({navigation}) => {
                 style={styles.btnStyle}
                 label="LOGIN"
                 onPress={handleSubmit}
+                isLoading={isLoading}
               />
             </View>
-            <BtnWrapper press={() => navigation.navigate('dashboard')}>
+            <BtnWrapper press={() => navigation.navigate('signup')}>
               <View style={styles.accountContainer}>
                 <Text
                   style={{
