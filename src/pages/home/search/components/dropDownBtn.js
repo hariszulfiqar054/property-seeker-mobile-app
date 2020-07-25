@@ -26,13 +26,14 @@ export default DropDownBtn;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Work.COLOR.primary,
-    width: '33%',
+    width: '90%',
     elevation: 6,
     borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
     height: WP('12'),
     flexDirection: 'row',
+    alignSelf: 'center',
   },
   txt: {
     color: Work.COLOR.white,
