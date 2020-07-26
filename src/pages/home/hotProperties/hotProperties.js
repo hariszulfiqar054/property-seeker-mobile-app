@@ -3,7 +3,10 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import SafeWrapper from '../../../shared/components/safeWrapper';
 import Header from '../../../shared/components/header';
 import PropertyCard from '../../../shared/components/propertyCard';
+import NotAvailable from '../../../shared/components/notAvailable';
+import * as Work from '../../../shared/exporter';
 
+const {WP} = Work;
 const HotProperties = ({navigation}) => {
   useEffect(() => {}, []);
 
@@ -12,7 +15,7 @@ const HotProperties = ({navigation}) => {
     <SafeWrapper>
       <Header label="hot properties" />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{alignSelf: 'center', flex: 1}}>
+        {/* <View style={{alignSelf: 'center', flex: 1}}>
           <PropertyCard
             onPress={() =>
               navigation.navigate('propertyDetail', {
@@ -38,7 +41,7 @@ const HotProperties = ({navigation}) => {
             price="234909"
             isHot
           />
-        </View>
+        </View> */}
       </ScrollView>
     </SafeWrapper>
   );

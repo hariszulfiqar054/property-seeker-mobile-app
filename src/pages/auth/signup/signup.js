@@ -13,7 +13,6 @@ const Signup = ({navigation}) => {
   const [isLoading, setisLoading] = useState(false);
 
   const signupHandler = async ({email, password, name, contact}) => {
-    console.log('asd');
     const isConnected = Work.checkInternetConnection();
     if (isConnected) {
       setisLoading(true);

@@ -84,8 +84,8 @@ export default PropertyCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Work.COLOR.white,
-    width: WP('70'),
-    height: WP('64'),
+    width: WP('80'),
+    height: WP('67'),
     shadowColor: Work.COLOR.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.6,
