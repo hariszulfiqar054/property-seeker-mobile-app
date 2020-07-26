@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import * as Work from '../../../shared/exporter';
 import {Formik} from 'formik';
@@ -6,9 +6,42 @@ import * as Yup from 'yup';
 import AuthWrapper from '../../../shared/components/authWrapper';
 import {Input} from 'react-native-elements';
 import Btn from '../components/btn';
+import axios from 'axios';
 
 const {WP} = Work;
 const Signup = ({navigation}) => {
+  const [isLoading, setisLoading] = useState(false);
+
+  const signupHandler = async ({email, password, name, contact}) => {
+    console.log('asd');
+    const isConnected = Work.checkInternetConnection();
+    if (isConnected) {
+      setisLoading(true);
+      try {
+        const response = await axios.post('user/signup', {
+          email,
+          password,
+          name,
+          contact,
+        });
+        if (response?.data?.data) {
+          Work.showToast('User Registered Successfully!');
+          navigation.navigate('login');
+        }
+      } catch (error) {
+        console.log(error);
+        if (error?.message?.includes('40')) {
+          Work.showToast('User Already Exist With These Credentials');
+        } else {
+          Work.showToast('Server Timeout');
+        }
+      }
+      setisLoading(false);
+    } else {
+      Work.showToast(Work.INTERNET_CONNECTION_ERROR);
+    }
+  };
+
   return (
     <AuthWrapper navigation={navigation} name="SIGN UP" isBack showLogo>
       <Formik
@@ -28,12 +61,11 @@ const Signup = ({navigation}) => {
           contact: Yup.string()
             .required('Required')
             .matches(/^\d*[1-9]\d*$/, 'Only Digits Allowed')
-            .min(10, 'Contact length should be 10')
-            .max(10, 'Contact length should be 10'),
+            .min(11, 'Contact length should be 11')
+            .max(11, 'Contact length should be 11'),
         })}
         onSubmit={(values, formikActions) => {
-          formikActions.setSubmitting(false);
-          console.log(values);
+          signupHandler(values);
         }}>
         {({
           handleBlur,
@@ -91,6 +123,7 @@ const Signup = ({navigation}) => {
               style={styles.btnStyle}
               label="SIGN UP !"
               onPress={handleSubmit}
+              isLoading={isLoading}
             />
           </View>
         )}
