@@ -24,10 +24,30 @@ const Properties = ({navigation}) => {
   const [homeData, setHomeData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [searchData, setSearchData] = useState(null);
+  const [city, setCity] = useState(null);
 
   useEffect(() => {
     getHomeData();
   }, [isBuy]);
+
+  const onSearchHandler = async () => {
+    const isConnected = Work.checkInternetConnection();
+    if (isConnected) {
+      setLoading(true);
+      try {
+        const response = await axios.post('property/searchproperty', {
+          city,
+        });
+        if (response?.data?.data) {
+          setCity(null);
+          navigation.navigate('searchResult', {result: response?.data?.data});
+        }
+      } catch (error) {
+        Work.showToast('Server Timeout');
+      }
+      setLoading(false);
+    } else Work.showToast(Work.INTERNET_CONNECTION_ERROR);
+  };
 
   const renderItem = ({item}) => (
     <View style={{marginVertical: WP('3'), alignSelf: 'center'}}>
@@ -90,8 +110,10 @@ const Properties = ({navigation}) => {
             containerStyle={styles.inputContainer}
             inputContainerStyle={{borderBottomWidth: 0}}
             inputStyle={{fontSize: WP('4')}}
+            value={city}
+            onChangeText={(text) => setCity(text)}
             rightIcon={
-              <BtnWrapper>
+              <BtnWrapper press={onSearchHandler}>
                 <SearchIcon
                   name="search1"
                   size={WP('5')}
@@ -99,7 +121,7 @@ const Properties = ({navigation}) => {
                 />
               </BtnWrapper>
             }
-            onSubmitEditing={() => console.log('asd')}
+            onSubmitEditing={onSearchHandler}
           />
           {homeData?.length > 0 ? (
             <View style={{marginTop: WP('7')}}>
