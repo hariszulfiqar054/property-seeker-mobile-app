@@ -70,7 +70,7 @@ const PropertyCard = ({
                 color={Work.COLOR.grey}
                 size={WP('6')}
               />
-              <Text style={styles.text}>{area}</Text>
+              <Text style={styles.text}>{area} sq ft</Text>
             </View>
           )}
         </View>

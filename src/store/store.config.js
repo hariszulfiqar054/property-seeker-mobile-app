@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-community/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
 import UserReducer from './reducer/user.reducer';
+import SearchReducer from './reducer/search.reducer';
 import axios from 'axios';
 import ENV from '../shared/environment/environment';
 
@@ -20,6 +21,7 @@ axios.interceptors.request.use(
 
 const rootReducer = combineReducers({
   user: UserReducer,
+  search: SearchReducer,
 });
 
 const persistConfig = {

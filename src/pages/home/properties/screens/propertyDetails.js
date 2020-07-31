@@ -69,7 +69,7 @@ const PropertyDetails = ({navigation, route}) => {
                 color={Work.COLOR.yellow}
                 size={WP('6.5')}
               />
-              <Text style={styles.infoText}>{route?.params?.area}</Text>
+              <Text style={styles.infoText}>{route?.params?.area} sq ft</Text>
             </View>
           </View>
           <View style={styles.descriptionContainer}>

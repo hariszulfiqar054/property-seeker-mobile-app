@@ -6,6 +6,7 @@ import Login from '../pages/auth/login/login';
 import Signup from '../pages/auth/signup/signup';
 import Dashboard from '../tabNavigator/tabNavigator';
 import PropertyDetail from '../pages/home/properties/screens/propertyDetails';
+import SearchResult from '../pages/home/searchResult/searchResult';
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -36,6 +37,11 @@ const Routes = () => {
             <Stack.Screen
               component={PropertyDetail}
               name="propertyDetail"
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              component={SearchResult}
+              name="searchResult"
               options={{headerShown: false}}
             />
           </>
