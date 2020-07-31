@@ -48,7 +48,7 @@ export default AuthWrapper;
 const styles = StyleSheet.create({
   imgBg: {
     width: WP('100'),
-    height: HP('95'),
+    height: HP('100'),
   },
   signIn: {
     color: Work.COLOR.white,
