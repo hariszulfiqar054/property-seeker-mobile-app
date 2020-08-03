@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {Input} from 'react-native-elements';
 import SafeWrapper from '../../../../shared/components/safeWrapper';
 import Header from '../../../../shared/components/header';
 import * as Work from '../../../../shared/exporter';
@@ -8,9 +9,38 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BathIcon from 'react-native-vector-icons/FontAwesome';
 import BtnWrapper from '../../../../shared/components/btnWrapper';
 import HotIcon from 'react-native-vector-icons/Fontisto';
+import {DotIndicator} from 'react-native-indicators';
+import axios from 'axios';
 
 const {WP} = Work;
 const PropertyDetails = ({navigation, route}) => {
+  const id = route?.params?.id;
+  const [bid, setBid] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+
+  const onPlaceBid = async () => {
+    if (parseInt(bid) < parseInt(route?.params?.price)) {
+      alert('Your bid less than starting bid');
+    } else {
+      const isConnected = Work.checkInternetConnection();
+      if (isConnected) {
+        setLoading(true);
+        try {
+          const response = await axios.post('property/placebid', {
+            property_id: id,
+            new_bid: parseInt(bid),
+          });
+          if (response?.data?.data) {
+            navigation.goBack();
+            alert('Bid Place Successfully');
+          }
+        } catch (error) {
+          Work.showToast('Server Timeout');
+        }
+        setLoading(false);
+      } else Work.showToast(Work.INTERNET_CONNECTION_ERROR);
+    }
+  };
   return (
     <SafeWrapper>
       <Header label="property detail" isBack navigation={navigation} />
@@ -78,9 +108,24 @@ const PropertyDetails = ({navigation, route}) => {
               {route?.params?.description}
             </Text>
           </View>
-          <BtnWrapper>
+          <Input
+            placeholder="Enter Bid"
+            inputStyle={{padding: 2}}
+            inputContainerStyle={{borderBottomWidth: 0, marginTop: WP('6')}}
+            containerStyle={styles.input}
+            onChangeText={(text) => setBid(text)}
+          />
+          <BtnWrapper press={onPlaceBid}>
             <View style={styles.btnContainer}>
-              <Text style={styles.btnText}>PLACE BID</Text>
+              {isLoading ? (
+                <DotIndicator
+                  size={7}
+                  style={{alignSelf: 'center'}}
+                  color={Work.COLOR.black}
+                />
+              ) : (
+                <Text style={styles.btnText}>PLACE BID</Text>
+              )}
             </View>
           </BtnWrapper>
         </View>
@@ -167,5 +212,14 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: WP('4.5'),
     fontWeight: 'bold',
+  },
+  input: {
+    borderWidth: 1,
+    justifyContent: 'center',
+    height: WP('15'),
+    width: '90%',
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginVertical: WP('4'),
   },
 });

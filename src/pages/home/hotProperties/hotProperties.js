@@ -30,6 +30,7 @@ const HotProperties = ({navigation}) => {
             country: item?.country,
             isHot: item?.isHot,
             description: item?.description,
+            id: item?._id,
           })
         }
         img={item?.img[0]}
