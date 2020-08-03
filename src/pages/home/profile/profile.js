@@ -14,20 +14,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const name = useSelector((state) => state?.user?.user?.name);
 
-  // const getData = async () => {
-  //   const isConnected = Work.checkInternetConnection();
-  //   if (isConnected) {
-  //     setLoading(true);
-  //     try {
-  //       const response = await axios.get('property/posted');
-  //       setProperties(response?.data?.data);
-  //     } catch (error) {
-  //       Work.showToast('Server Timeout');
-  //     }
-  //     setLoading(false);
-  //   } else Work.showToast(Work.INTERNET_CONNECTION_ERROR);
-  // };
-
   return (
     <SafeWrapper>
       <ImageBackground
