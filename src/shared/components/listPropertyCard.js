@@ -32,7 +32,7 @@ const ListPropertyCard = ({
           </Text>
         </View>
       </View>
-      {onPressApproved && onPressDelete ? (
+      {onPressApproved && onPressDelete && bid_by && bid_price ? (
         <View style={{position: 'absolute', right: '2%', top: '15%'}}>
           <BtnWrapper press={onPressApproved}>
             <Icon
@@ -55,7 +55,9 @@ const ListPropertyCard = ({
       {bid_by && bid_price ? (
         <View style={styles.bidContainer}>
           <Text>
-            <Text style={styles.bid_by}>Bid by: {bid_by}</Text>
+            <Text style={styles.bid_by}>
+              Bid by: {bid_by?.substring(0, 10)}
+            </Text>
             <Text style={styles.bid_price}>
               {'    '}New Bid: {bid_price}
             </Text>

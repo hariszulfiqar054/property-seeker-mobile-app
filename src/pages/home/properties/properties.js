@@ -6,6 +6,7 @@ import {
   FlatList,
   ImageBackground,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import SafeWrapper from '../../../shared/components/safeWrapper';
 import {Input} from 'react-native-elements';
@@ -98,7 +99,11 @@ const Properties = ({navigation}) => {
       <ImageBackground
         style={{flex: 1}}
         source={require('../../../assets/bg.png')}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getHomeData} />
+          }>
           <Header label="home" />
           <PropertyOption
             propertyType={isBuy}
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: Work.COLOR.white,
-    height: '7%',
+    height: WP('13'),
     width: '92%',
     alignSelf: 'center',
     borderRadius: 5,
