@@ -97,7 +97,7 @@ const Login = ({navigation}) => {
                 isLoading={isLoading}
               />
             </View>
-            <BtnWrapper press={() => navigation.navigate('postProperty')}>
+            <BtnWrapper press={() => navigation.navigate('signup')}>
               <View style={styles.accountContainer}>
                 <Text
                   style={{

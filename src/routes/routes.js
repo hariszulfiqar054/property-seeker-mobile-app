@@ -27,11 +27,6 @@ const Routes = () => {
               name="signup"
               options={{headerShown: false}}
             />
-            <Stack.Screen
-              component={PostProperty}
-              name="postProperty"
-              options={{headerShown: false}}
-            />
           </>
         ) : (
           <>
@@ -48,6 +43,11 @@ const Routes = () => {
             <Stack.Screen
               component={SearchResult}
               name="searchResult"
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              component={PostProperty}
+              name="postProperty"
               options={{headerShown: false}}
             />
           </>
