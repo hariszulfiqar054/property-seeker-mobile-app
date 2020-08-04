@@ -7,6 +7,7 @@ import Signup from '../pages/auth/signup/signup';
 import Dashboard from '../tabNavigator/tabNavigator';
 import PropertyDetail from '../pages/home/properties/screens/propertyDetails';
 import SearchResult from '../pages/home/searchResult/searchResult';
+import PostProperty from '../pages/home/postProperty/postProperty';
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -24,6 +25,11 @@ const Routes = () => {
             <Stack.Screen
               component={Signup}
               name="signup"
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              component={PostProperty}
+              name="postProperty"
               options={{headerShown: false}}
             />
           </>

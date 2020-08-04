@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     backgroundColor: Work.COLOR.primary,
-    height: '7%',
+    height: WP('12'),
     justifyContent: 'center',
   },
   txt: {
