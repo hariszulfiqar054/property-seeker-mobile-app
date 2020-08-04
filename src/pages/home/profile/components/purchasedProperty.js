@@ -19,7 +19,7 @@ const PurchasedProperty = () => {
     if (isConnected) {
       setLoading(true);
       try {
-        const response = await axios.get('property/posted');
+        const response = await axios.get('property/getpurchased');
         setPostedProperty(response?.data?.data);
       } catch (error) {
         Work.showToast('Server Timeout');

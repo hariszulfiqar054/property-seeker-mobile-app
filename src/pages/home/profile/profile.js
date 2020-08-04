@@ -10,7 +10,7 @@ import * as JOBS from '../../../store/action.exporter';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {WP} = Work;
-const Profile = () => {
+const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const name = useSelector((state) => state?.user?.user?.name);
 
@@ -30,6 +30,11 @@ const Profile = () => {
         <View style={{marginTop: WP('15')}}>
           <PersonIcon name={name} />
         </View>
+        <BtnWrapper press={() => navigation.navigate('postProperty')}>
+          <View style={styles.txtContainer}>
+            <Text style={styles.txt}>Post a Property</Text>
+          </View>
+        </BtnWrapper>
         <View style={styles.tabContainer}>
           <TopTabs />
         </View>
@@ -46,5 +51,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: '4%',
     top: '3%',
+  },
+  txt: {
+    color: Work.COLOR.white,
+    fontWeight: 'bold',
+    fontSize: WP('4.5'),
+  },
+  txtContainer: {
+    position: 'absolute',
+    top: '3%',
+    left: '4%',
   },
 });

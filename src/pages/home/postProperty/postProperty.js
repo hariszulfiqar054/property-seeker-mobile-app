@@ -6,13 +6,16 @@ import {Input} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import axios from 'axios';
 import SafeWrapper from '../../../shared/components/safeWrapper';
+import BtnWrapper from '../../../shared/components/btnWrapper';
 import * as Work from '../../../shared/exporter';
 import Header from '../../../shared/components/header';
 import Btn from '../search/components/btn';
+import {DotIndicator} from 'react-native-indicators';
 
 const {WP} = Work;
 const PostProperty = ({navigation}) => {
   const [type, setType] = useState('buy');
+  const [isLoading, setLoading] = useState(false);
 
   return (
     <SafeWrapper>
@@ -43,9 +46,7 @@ const PostProperty = ({navigation}) => {
             city: Yup.string().required('Required'),
             description: Yup.string().required('Required'),
           })}
-          onSubmit={(values, formikActions) => {
-            loginHandler(values);
-          }}>
+          onSubmit={(values, formikActions) => {}}>
           {({
             handleBlur,
             handleChange,
@@ -143,6 +144,15 @@ const PostProperty = ({navigation}) => {
                     : null
                 }
               />
+              <BtnWrapper>
+                <View style={styles.btnContainer}>
+                  {isLoading ? (
+                    <DotIndicator size={WP('3')} />
+                  ) : (
+                    <Text style={styles.btnText}>ADD PROPERTY</Text>
+                  )}
+                </View>
+              </BtnWrapper>
             </View>
           )}
         </Formik>
@@ -177,5 +187,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '95%',
     alignSelf: 'center',
+  },
+  btnContainer: {
+    backgroundColor: Work.COLOR.yellow,
+    height: WP('14'),
+    justifyContent: 'center',
+    marginVertical: WP('10'),
+    alignItems: 'center',
+    width: '95%',
+    alignSelf: 'center',
+    elevation: 6,
+    borderRadius: 7,
+  },
+  btnText: {
+    fontSize: WP('4.5'),
+    fontWeight: 'bold',
   },
 });

@@ -5,6 +5,7 @@ import BtnWrapper from './btnWrapper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BathIcon from 'react-native-vector-icons/FontAwesome';
 import HotIcon from 'react-native-vector-icons/Fontisto';
+import ENV from '../environment/environment';
 const {WP} = Work;
 const PropertyCard = ({
   img,
