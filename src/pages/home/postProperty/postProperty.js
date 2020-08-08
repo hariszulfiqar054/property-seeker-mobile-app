@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Input} from 'react-native-elements';
@@ -11,11 +11,77 @@ import * as Work from '../../../shared/exporter';
 import Header from '../../../shared/components/header';
 import Btn from '../search/components/btn';
 import {DotIndicator} from 'react-native-indicators';
+import ImagePicker from 'react-native-image-picker';
 
 const {WP} = Work;
 const PostProperty = ({navigation}) => {
   const [type, setType] = useState('buy');
   const [isLoading, setLoading] = useState(false);
+  const [img, setImage] = useState(null);
+
+  const options = {
+    title: 'Select Imager',
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+  };
+
+  const imageHandler = () => {
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        setImage('data:image/jpeg;base64,' + response.data);
+      }
+    });
+  };
+
+  const postProperty = async ({
+    description,
+    bedroom,
+    bathroom,
+    city,
+    area,
+    starting_bid,
+  }) => {
+    if (img) {
+      const isConnected = Work.checkInternetConnection();
+      if (isConnected) {
+        setLoading(true);
+        try {
+          const response = await axios.post('property/addproperty', {
+            area: parseInt(area),
+            city,
+            bedroom: parseInt(bedroom),
+            bathroom: parseInt(bathroom),
+            description,
+            starting_bid: parseInt(starting_bid),
+            property_type: type,
+            img: img,
+          });
+          if (response?.data?.data) {
+            console.log(response?.data?.data);
+            navigation.goBack();
+            alert('Post Property Successfully !');
+          }
+        } catch (error) {
+          console.log(error.message);
+          Work.showToast('Server Timeout');
+        }
+
+        setLoading(false);
+      } else {
+        Work.showToast(Work.INTERNET_CONNECTION_ERROR);
+      }
+    } else {
+      alert('Select Image!');
+    }
+  };
 
   return (
     <SafeWrapper>
@@ -46,7 +112,9 @@ const PostProperty = ({navigation}) => {
             city: Yup.string().required('Required'),
             description: Yup.string().required('Required'),
           })}
-          onSubmit={(values, formikActions) => {}}>
+          onSubmit={(values, formikActions) => {
+            postProperty(values);
+          }}>
           {({
             handleBlur,
             handleChange,
@@ -128,6 +196,22 @@ const PostProperty = ({navigation}) => {
                 value={values.city}
                 errorMessage={errors.city && touched.city ? errors.city : null}
               />
+              <Text style={styles.txt}>Enter Starting Bid :</Text>
+              <Input
+                placeholder="Enter Starting bid...."
+                inputContainerStyle={styles.removeBorder}
+                inputStyle={{
+                  fontSize: WP('4.5'),
+                }}
+                onChangeText={handleChange('starting_bid')}
+                onBlur={handleBlur('starting_bid')}
+                value={values.starting_bid}
+                errorMessage={
+                  errors.starting_bid && touched.starting_bid
+                    ? errors.starting_bid
+                    : null
+                }
+              />
               <Text style={styles.txt}>Enter Description :</Text>
               <Input
                 placeholder="Enter Description...."
@@ -144,7 +228,23 @@ const PostProperty = ({navigation}) => {
                     : null
                 }
               />
-              <BtnWrapper>
+              <BtnWrapper press={imageHandler}>
+                <View style={styles.pickImg}>
+                  <Text style={{color: Work.COLOR.white, fontWeight: 'bold'}}>
+                    SELECT IMAGE
+                  </Text>
+                </View>
+              </BtnWrapper>
+              {img && (
+                <Image
+                  style={styles.img}
+                  source={{
+                    uri: img,
+                  }}
+                />
+              )}
+
+              <BtnWrapper press={handleSubmit}>
                 <View style={styles.btnContainer}>
                   {isLoading ? (
                     <DotIndicator size={WP('3')} />
@@ -202,5 +302,22 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: WP('4.5'),
     fontWeight: 'bold',
+  },
+  pickImg: {
+    backgroundColor: Work.COLOR.primary,
+    height: WP('14'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '95%',
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: WP('4'),
+  },
+  img: {
+    width: '80%',
+    height: WP('40'),
+    marginTop: WP('4'),
+    alignSelf: 'center',
+    resizeMode: 'contain',
   },
 });

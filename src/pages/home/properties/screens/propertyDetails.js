@@ -10,6 +10,7 @@ import BathIcon from 'react-native-vector-icons/FontAwesome';
 import BtnWrapper from '../../../../shared/components/btnWrapper';
 import HotIcon from 'react-native-vector-icons/Fontisto';
 import {DotIndicator} from 'react-native-indicators';
+import ENV from '../../../../shared/environment/environment';
 import axios from 'axios';
 
 const {WP} = Work;
@@ -21,6 +22,8 @@ const PropertyDetails = ({navigation, route}) => {
   const onPlaceBid = async () => {
     if (parseInt(bid) < parseInt(route?.params?.price)) {
       alert('Your bid less than starting bid');
+    } else if (!/^\d+$/.test(bid?.toString())) {
+      alert('Invalid');
     } else {
       const isConnected = Work.checkInternetConnection();
       if (isConnected) {
@@ -47,7 +50,12 @@ const PropertyDetails = ({navigation, route}) => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1}}>
           <View style={styles.imgContainer}>
-            <Image style={styles.img} source={{uri: route?.params?.img}} />
+            <Image
+              style={styles.img}
+              source={{
+                uri: ENV.URL + route?.params?.img?.split('uploads/')?.pop(),
+              }}
+            />
           </View>
           <View>
             <Text style={styles.price}>Rs. {route?.params?.price}</Text>
@@ -145,6 +153,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     height: null,
+    resizeMode: 'contain',
   },
   price: {
     fontSize: WP('5'),

@@ -18,6 +18,8 @@ const PropertyCard = ({
   price,
   isHot,
 }) => {
+  const temp = img?.split('uploads/')?.pop();
+  console.log(temp);
   return (
     <BtnWrapper press={onPress}>
       <View style={styles.container}>
@@ -25,7 +27,7 @@ const PropertyCard = ({
           <Image
             style={styles.img}
             source={{
-              uri: img,
+              uri: ENV.URL + temp,
             }}
           />
         </View>
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     height: null,
+    resizeMode: 'contain',
   },
   imgContainer: {width: '100%', height: '70%'},
   text: {
