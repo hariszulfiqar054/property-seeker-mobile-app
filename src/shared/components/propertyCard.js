@@ -19,7 +19,7 @@ const PropertyCard = ({
   isHot,
 }) => {
   const temp = img?.split('uploads/')?.pop();
-  console.log(temp);
+  
   return (
     <BtnWrapper press={onPress}>
       <View style={styles.container}>
